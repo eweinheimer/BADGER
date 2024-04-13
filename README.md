@@ -1,4 +1,4 @@
-BADGER: Bivariate Analysis of Differential Gene Expression Reactions
+**BADGER**: **B**ivariate **A**nalysis of **D**ifferential **G**ene **E**xpression **R**eactions
 
 Authors: Ellen I. Weinheimer, James B. Pease
 
