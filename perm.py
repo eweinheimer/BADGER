@@ -113,7 +113,7 @@ def permutationTest(file):
                     else:
                         samples = line.split("\n")[0].split(",")
             with open("permutation_output_comp{}.csv".format(i[0] + "v" + i[1] + "." + j[0] + "v" + j[1]),"w") as f:
-                f.write("Gene" + "," + "PropSigPermutations" + "," + "CritPVal" + "," + "Mean_{}".format(treatmentlabel) + "-Mean_{}".format(controllabel) + "," + "MaxIndivExppression" + "," + "SDD" + "\n")
+                f.write("Gene" + "," + "PropSigPermutations" + "," + "CritPVal" + "," + "Mean_{}".format(treatmentlabel) + "-Mean_{}".format(controllabel) + "," + "MaxIndivExpression" + "," + "SDD" + "\n")
                 for j in range(len(output)):
                     for k in range(len(output[j])):
                         f.write(str(output[j][k]) + ",") if k<len(output[j])-1 else f.write(str(output[j][k]) + "\n")
