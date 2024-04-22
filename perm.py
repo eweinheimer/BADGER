@@ -74,8 +74,8 @@ def permutationTest(file):
                 elif groups[k][0]==i[1] and groups[k][1]==treatmentlabel:
                     treatids_t1[groups[k][2]] = groups[k][3]
             
-            with open(file) as infile:
-                output=[]
+            with open(file) as infile, open("permutation_output_comp{}.csv".format(i[0] + "v" + i[1] + "." + j[0] + "v" + j[1]),"w") as f:
+                f.write("Gene" + "," + "PropSigPermutations" + "," + "CritPVal" + "," + "Mean_{}".format(treatmentlabel) + "-Mean_{}".format(controllabel) + "," + "MaxIndivExpression" + "," + "SDD" + "\n")
                 samples = False
                 for line in infile:
                     if samples:
@@ -107,16 +107,14 @@ def permutationTest(file):
                             permTstat, permPval = stats.ttest_ind(exDiff1,exDiff2)
                             if permPval < critPval:
                                 sigreps+=1
-
-                        entry = [line.split(",")[0],sigreps/len(reps),critPval,(statistics.mean(treatdiffs)-statistics.mean(controldiffs)),max(countssub),(statistics.mean(treatdiffs)-statistics.mean(controldiffs))/max(countssub)]
-                        output.append(entry)
+                        if max(countssub) == 0:
+                            entry = [line.split(",")[0],sigreps/len(reps),critPval,0,0,0]
+                        else:
+                            entry = [line.split(",")[0],sigreps/len(reps),critPval,(statistics.mean(treatdiffs)-statistics.mean(controldiffs)),max(countssub),(statistics.mean(treatdiffs)-statistics.mean(controldiffs))/max(countssub)]
+                        for m in range(len(entry)):
+                            f.write(str(entry[m]) + ",") if m < len(entry)-1 else f.write(str(entry[m]) + "\n")
                     else:
                         samples = line.split("\n")[0].split(",")
-            with open("permutation_output_comp{}.csv".format(i[0] + "v" + i[1] + "." + j[0] + "v" + j[1]),"w") as f:
-                f.write("Gene" + "," + "PropSigPermutations" + "," + "CritPVal" + "," + "Mean_{}".format(treatmentlabel) + "-Mean_{}".format(controllabel) + "," + "MaxIndivExpression" + "," + "SDD" + "\n")
-                for j in range(len(output)):
-                    for k in range(len(output[j])):
-                        f.write(str(output[j][k]) + ",") if k<len(output[j])-1 else f.write(str(output[j][k]) + "\n")
     return ''
 
 groups,times,treats = processExpDesign(factors)
