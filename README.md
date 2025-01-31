@@ -10,4 +10,4 @@
 
 **Basic Usage**: BADGER requires as input (1) a csv count table of normalized RNAseq reads (--input); (2) a csv file summarizing the experimental design factors with one sample per line and columns indicating treatment, timepoint, individual, and sample ID (--factors), and (3) the desired control condition label as seen in the treatment column of the experimental design factors file (--control). See files in test_files/ and command in ./test.sh as an example. 
 
-**Questions?** Please contact Ellen Weinheimer (weine18@wfu.edu).
+**Questions?** Please contact Ellen Weinheimer (weinei18@wfu.edu).
